@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mybatis.mapper.CourseFeedbackEntityMapper">
+  <resultMap id="BaseResultMap" type="com.example.mybatis.entity.CourseFeedbackEntity">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="level" jdbcType="INTEGER" property="level" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="evaluation" jdbcType="VARCHAR" property="evaluation" />
+  </resultMap>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, level, content, evaluation
+    from course_feedback
+  </select>
+  <resultMap id="BaseResultMap" type="com.example.mybatis.entity.CourseFeedbackEntity">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="level" jdbcType="INTEGER" property="level" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="evaluation" jdbcType="VARCHAR" property="evaluation" />
+  </resultMap>
+  <select id="selectByLevel" resultMap="BaseResultMap">
+    select id, level, content, evaluation
+    from course_feedback where level in
+    <foreach close=")" collection="levels" item="item" open="(" separator=",">
+      #{item}
+    </foreach>
+  </select>
+</mapper>
